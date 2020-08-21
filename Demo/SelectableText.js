@@ -1,7 +1,7 @@
-import React from 'react'
-import { Text, requireNativeComponent, Platform } from 'react-native'
-import { v4 } from 'uuid'
 import memoize from 'fast-memoize'
+import React from 'react'
+import { Platform, requireNativeComponent, Text } from 'react-native'
+import { v4 } from 'uuid'
 
 const RNSelectableText = requireNativeComponent('RNSelectableText')
 
@@ -78,9 +78,9 @@ export const SelectableText = ({
   TextComponent = TextComponent || Text;
   textValueProp = textValueProp || 'children';  // default to `children` which will render `value` as a child of `TextComponent`
   const onSelectionNative = ({
-    nativeEvent: { content, eventType, selectionStart, selectionEnd },
+    nativeEvent: { content, eventType, selectionStart, selectionEnd, selectionLeft, selectionTop, selectionWidth, selectionHeight },
   }) => {
-    onSelection && onSelection({ content, eventType, selectionStart, selectionEnd })
+    onSelection && onSelection({ content, eventType, selectionStart, selectionEnd, selectionLeft, selectionTop, selectionWidth, selectionHeight })
   }
 
   const onHighlightPressNative = onHighlightPress

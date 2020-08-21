@@ -194,6 +194,9 @@ UITextPosition* beginning;
 
 - (void)tappedMenuItem:(NSString *)eventType
 {
+    UITextRange * textRange = [_backedTextInputView selectedTextRange];
+    CGRect selectionRect = [_backedTextInputView firstRectForRange:textRange];
+    
     RCTTextSelection *selection = self.selection;
     
     NSUInteger start = selection.start;
@@ -203,7 +206,11 @@ UITextPosition* beginning;
         @"content": [[self.attributedText string] substringWithRange:NSMakeRange(start, end)],
         @"eventType": eventType,
         @"selectionStart": @(start),
-        @"selectionEnd": @(selection.end)
+        @"selectionEnd": @(selection.end),
+        @"selectionLeft": @(selectionRect.origin.x),
+        @"selectionTop": @(selectionRect.origin.y),
+        @"selectionWidth": @(selectionRect.size.width),
+        @"selectionHeight": @(selectionRect.size.height),
     });
     
     [_backedTextInputView setSelectedTextRange:nil notifyDelegate:false];
